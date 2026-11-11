@@ -24,7 +24,7 @@ html {
 
 body {
   margin: 0;
-  background: var(--dark);
+  background: var(--red);
   color: var(--cream);
   font-family: Helvetica, Arial, sans-serif;
   overflow-x: hidden;
@@ -50,7 +50,7 @@ header {
   transform: translate(-50%, -50%);
   z-index: 30;
   font-family: "DM Serif Display", serif;
-  font-size: clamp(3rem, 12vw, 8rem);
+  font-size: clamp(4rem, 16vw, 11rem);
   font-style: italic;
   letter-spacing: -0.115em;
   color: var(--cream);
@@ -105,6 +105,23 @@ main {
   text-transform: uppercase;
 }
 
+  .scroll-arrow {
+  position: absolute;
+  bottom: 12%;
+  font-size: 38px !important;
+  letter-spacing: 0 !important;
+  animation: arrowFloat 1.5s ease-in-out infinite;
+}
+
+@keyframes arrowFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
 .intro {
   margin-top: 70px;
   font-family: "DM Serif Display", serif;
@@ -119,7 +136,7 @@ main {
 }
 
 .folder {
-  background: var(--red);
+  background: var(--dark);
   color: var(--cream);
   border-radius: 22px 22px 8px 8px;
   position: relative;
@@ -135,7 +152,7 @@ main {
   height: 28px;
   top: -22px;
   left: 35px;
-  background: var(--red);
+  background: var(--dark);
   border-radius: 14px 14px 0 0;
 }
 
@@ -162,13 +179,22 @@ main {
 }
 
 .folder-content {
-  display: none;
-  padding-top: 25px;
-  border-top: 1px solid #ffffff55;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding-top: 0;
+  border-top: 1px solid transparent;
+  transition:
+    max-height .7s ease,
+    opacity .4s ease,
+    padding-top .5s ease;
 }
 
 .folder-content.open {
-  display: block;
+  max-height: 2500px;
+  opacity: 1;
+  padding-top: 25px;
+  border-top-color: #ffffff55;
 }
 
 .columns {
@@ -399,20 +425,20 @@ footer {
 
 <main>
 <section class="hero" id="home">
-  <p>A personal archive of cinema</p>
+  <p class="scroll-arrow">↓</p>
   <a class="logo" href="#home" id="logo">Appleboxd</a>
 </section>
 
 <section class="folder-area">
 
-  <div class="folder">
-    <div class="folder-toggle" onclick="togglePosts()">
+  <div class="folder" id="posts">
+    <div class="folder-toggle" onclick="toggleFolder('postsContent')">
       <p>01 / The collection</p>
       <h2>Posts ↓</h2>
       <p>Reviews · Film Lists · Collab</p>
     </div>
 
-    <div class="folder-content" id="posts">
+    <div class="folder-content" id="postsContent">
       <div class="columns">
 
         <div class="column">
@@ -446,9 +472,14 @@ footer {
   </div>
 
   <div class="folder" id="posters">
+
+  <div class="folder-toggle" onclick="toggleFolder('postersContent')">
     <p>02 / Visual collection</p>
-    <h2>Posters</h2>
+    <h2>Posters ↓</h2>
     <p>Film-inspired graphic design</p>
+  </div>
+
+  <div class="folder-content" id="postersContent">
 
     <div class="poster-grid">
       <div class="poster" onclick="showPoster('Poster 01')">
