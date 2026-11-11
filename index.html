@@ -416,10 +416,10 @@ footer {
 
 <header>
   <nav>
-    <a href="#home">Home</a>
-    <a href="#posts" onclick="openPosts()">Posts</a>
-    <a href="#posters">Posters</a>
-    <a href="#about">About</a>
+  <a href="#home">Home</a>
+  <a href="#posts" onclick="openPosts()">Posts</a>
+  <a href="#posters" onclick="openFolder('postersContent')">Posters</a>
+  <a href="#about" onclick="openFolder('aboutContent')">About</a>
   </nav>
 </header>
 
@@ -497,21 +497,29 @@ footer {
         <strong>POSTER<br>THREE</strong>
         <span>FILM ARTWORK</span>
       </div>
-    </div>
+        </div>
+  </div>
   </div>
 
   <div class="folder" id="about">
+
+  <div class="folder-toggle" onclick="toggleFolder('aboutContent')">
     <p>03 / The person behind the archive</p>
-    <h2>About</h2>
+    <h2>About ↓</h2>
+  </div>
+
+  <div class="folder-content" id="aboutContent">
     <div class="about-copy">
       Appleboxd is a personal space for sharing thoughts on films, exploring cinema, and experimenting with graphic design.
     </div>
+
     <div class="links">
       <a href="https://instagram.com/appleboxd" target="_blank">INSTAGRAM ↗</a>
       <a href="#">PINTEREST ↗</a>
     </div>
   </div>
 
+  </div>
 </section>
 </main>
 
@@ -533,12 +541,16 @@ window.addEventListener("scroll", () => {
   logo.classList.toggle("small", window.scrollY > 100);
 });
 
-function togglePosts() {
-  document.getElementById("posts").classList.toggle("open");
+function toggleFolder(id) {
+  document.getElementById(id).classList.toggle("open");
+}
+
+function openFolder(id) {
+  document.getElementById(id).classList.add("open");
 }
 
 function openPosts() {
-  document.getElementById("posts").classList.add("open");
+  openFolder("postsContent");
 }
 
 function showPoster(name) {
